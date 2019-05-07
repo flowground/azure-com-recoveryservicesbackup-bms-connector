@@ -1,0 +1,60 @@
+{
+    "type": "object",
+    "properties": {
+        "azureRegion": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Contract to validate if backup can be enabled on the given resource in a given vault and given configuration.\r\nIt will validate followings\r\n1. Vault capacity\r\n2. VM is already protected\r\n3. Any VM related configuration passed in properties.",
+            "properties": {
+                "properties": {
+                    "description": "Configuration of VM if any needs to be validated like OS type etc",
+                    "type": "string"
+                },
+                "resourceId": {
+                    "description": "ARM Virtual Machine Id",
+                    "type": "string"
+                },
+                "resourceType": {
+                    "description": "ProtectedItem Type- VM, SqlDataBase, AzureFileShare etc",
+                    "enum": [
+                        "Invalid",
+                        "VM",
+                        "FileFolder",
+                        "AzureSqlDb",
+                        "SQLDB",
+                        "Exchange",
+                        "Sharepoint",
+                        "VMwareVM",
+                        "SystemState",
+                        "Client",
+                        "GenericDataSource",
+                        "SQLDataBase",
+                        "AzureFileShare",
+                        "SAPHanaDatabase",
+                        "SAPAseDatabase"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "modelAsString": true,
+                        "name": "DataSourceType"
+                    }
+                },
+                "vaultId": {
+                    "description": "Specifies the arm resource id of the vault",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

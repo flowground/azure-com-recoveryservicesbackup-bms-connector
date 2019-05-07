@@ -1,0 +1,37 @@
+{
+    "type": "object",
+    "properties": {
+        "vaultName": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Base class for validate operation request.",
+            "discriminator": {
+                "propertyName": "objectType"
+            },
+            "properties": {
+                "objectType": {
+                    "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "objectType"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,56 @@
+{
+    "type": "object",
+    "properties": {
+        "azureRegion": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "BackupStatus request.",
+            "properties": {
+                "poLogicalName": {
+                    "description": "Protectable Item Logical Name",
+                    "type": "string"
+                },
+                "resourceId": {
+                    "description": "Entire ARM resource id of the resource",
+                    "type": "string"
+                },
+                "resourceType": {
+                    "description": "Container Type - VM, SQLPaaS, DPM, AzureFileShare...",
+                    "enum": [
+                        "Invalid",
+                        "VM",
+                        "FileFolder",
+                        "AzureSqlDb",
+                        "SQLDB",
+                        "Exchange",
+                        "Sharepoint",
+                        "VMwareVM",
+                        "SystemState",
+                        "Client",
+                        "GenericDataSource",
+                        "SQLDataBase",
+                        "AzureFileShare",
+                        "SAPHanaDatabase",
+                        "SAPAseDatabase"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "modelAsString": true,
+                        "name": "DataSourceType"
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

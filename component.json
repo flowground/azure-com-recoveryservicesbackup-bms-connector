@@ -1,0 +1,301 @@
+{
+    "title": "RecoveryServicesBackupClient",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/azure.com/recoveryservicesbackup-bms/2017-07-01/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://management.azure.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "azure_auth": {
+                "label": "Azure Active Directory OAuth2 Flow",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://login.microsoftonline.com/common/oauth2/authorize"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "ProtectionIntent_Validate": {
+            "main": "./lib/actions/ProtectionIntent_Validate.js",
+            "title": "It will validate followings\r\n1. Vault capacity\r\n2. VM is already protected\r\n3. Any VM related configuration passed in properties.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ProtectionIntent_Validate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "BackupStatus_Get": {
+            "main": "./lib/actions/BackupStatus_Get.js",
+            "title": "Get the container backup status",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/BackupStatus_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "FeatureSupport_Validate": {
+            "main": "./lib/actions/FeatureSupport_Validate.js",
+            "title": "It will validate if given feature with resource properties is supported in service",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/FeatureSupport_Validate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ProtectionIntent_Delete": {
+            "main": "./lib/actions/ProtectionIntent_Delete.js",
+            "title": "Used to remove intent from an item",
+            "description": "Used to remove intent from an item",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ProtectionIntent_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ProtectionIntent_Get": {
+            "main": "./lib/actions/ProtectionIntent_Get.js",
+            "title": "Provides the details of the protection intent up item. This is an asynchronous operation. To know the status of the operation,\r\ncall the GetItemOperationResult API.",
+            "description": "Provides the details of the protection intent up item. This is an asynchronous operation. To know the status of the operation,\r\ncall the GetItemOperationResult API.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ProtectionIntent_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ProtectionIntent_CreateOrUpdate": {
+            "main": "./lib/actions/ProtectionIntent_CreateOrUpdate.js",
+            "title": "Create Intent for Enabling backup of an item. This is a synchronous operation.",
+            "description": "Create Intent for Enabling backup of an item. This is a synchronous operation.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ProtectionIntent_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "BackupJobs_List": {
+            "main": "./lib/actions/BackupJobs_List.js",
+            "title": "Provides a pageable list of jobs.",
+            "description": "Provides a pageable list of jobs.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/BackupJobs_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ExportJobsOperationResults_Get": {
+            "main": "./lib/actions/ExportJobsOperationResults_Get.js",
+            "title": "Gets the operation result of operation triggered by Export Jobs API. If the operation is successful, then it also\r\ncontains URL of a Blob and a SAS key to access the same. The blob contains exported jobs in JSON serialized format.",
+            "description": "Gets the operation result of operation triggered by Export Jobs API. If the operation is successful, then it also\r\ncontains URL of a Blob and a SAS key to access the same. The blob contains exported jobs in JSON serialized format.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ExportJobsOperationResults_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "JobDetails_Get": {
+            "main": "./lib/actions/JobDetails_Get.js",
+            "title": "Gets extended information associated with the job.",
+            "description": "Gets extended information associated with the job.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/JobDetails_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Jobs_Export": {
+            "main": "./lib/actions/Jobs_Export.js",
+            "title": "Triggers export of jobs specified by filters and returns an OperationID to track.",
+            "description": "Triggers export of jobs specified by filters and returns an OperationID to track.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Jobs_Export.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "BackupPolicies_List": {
+            "main": "./lib/actions/BackupPolicies_List.js",
+            "title": "Lists of backup policies associated with Recovery Services Vault. API provides pagination parameters to fetch\r\nscoped results.",
+            "description": "Lists of backup policies associated with Recovery Services Vault. API provides pagination parameters to fetch\r\nscoped results.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/BackupPolicies_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "BackupProtectedItems_List": {
+            "main": "./lib/actions/BackupProtectedItems_List.js",
+            "title": "Provides a pageable list of all items that are backed up within a vault.",
+            "description": "Provides a pageable list of all items that are backed up within a vault.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/BackupProtectedItems_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "BackupProtectionIntent_List": {
+            "main": "./lib/actions/BackupProtectionIntent_List.js",
+            "title": "Provides a pageable list of all intents that are present within a vault.",
+            "description": "Provides a pageable list of all intents that are present within a vault.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/BackupProtectionIntent_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "BackupUsageSummaries_List": {
+            "main": "./lib/actions/BackupUsageSummaries_List.js",
+            "title": "Fetches the backup management usage summaries of the vault.",
+            "description": "Fetches the backup management usage summaries of the vault.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/BackupUsageSummaries_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Operation_Validate": {
+            "main": "./lib/actions/Operation_Validate.js",
+            "title": "Validate operation for specified backed up item. This is a synchronous operation.",
+            "description": "Validate operation for specified backed up item. This is a synchronous operation.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Operation_Validate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

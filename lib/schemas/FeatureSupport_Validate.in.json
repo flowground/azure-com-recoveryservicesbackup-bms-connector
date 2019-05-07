@@ -1,0 +1,30 @@
+{
+    "type": "object",
+    "properties": {
+        "azureRegion": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Base class for feature request",
+            "discriminator": {
+                "propertyName": "featureType"
+            },
+            "properties": {
+                "featureType": {
+                    "description": "backup support feature type.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
